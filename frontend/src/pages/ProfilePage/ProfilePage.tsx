@@ -77,125 +77,98 @@ export default function ProfilePage() {
   };
 
   if (loading) {
-    return <p style={{ padding: "20px" }}>Loading profile...</p>;
+    return <p className="text-center mt-10 text-gray-400">Loading...</p>;
   }
 
   if (error) {
-    return <p style={{ padding: "20px", color: "red" }}>{error}</p>;
+    return <p className="text-center mt-10 text-red-500">{error}</p>;
   }
 
   if (!user) {
-    return <p style={{ padding: "20px" }}>No user data</p>;
+    return <p className="text-center mt-10 text-gray-400">No user data</p>;
   }
 
   return (
-    <div>
-      <h1 className="text-3xl flex items-center justify-center">Profile</h1>
-      <div className="flex items-center justify-center ">
-        {user.avatar && (
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-6">
+      <div className="w-full max-w-xl bg-gray-900 rounded-2xl border border-gray-800 shadow-xl p-6">
+
+        {/* Header */}
+        <div className="flex flex-col items-center mb-6">
           <img
-            src={user.avatar}
+            src={form.avatar || user.avatar || "https://via.placeholder.com/120"}
             alt="avatar"
-            style={{
-              width: "120px",
-              height: "120px",
-              objectFit: "cover",
-              borderRadius: "50%",
-              marginBottom: "16px",
-            }}
+            className="w-28 h-28 rounded-full object-cover border-4 border-gray-800 mb-3"
           />
-        )}
+          <h2 className="text-xl text-white font-semibold">
+            {user.username}
+          </h2>
+          <p className="text-gray-400 text-sm">{user.email}</p>
+        </div>
+
+        {/* Info */}
+        <div className="space-y-4">
+
+          {[
+            { label: "First name", key: "first_name" },
+            { label: "Last name", key: "last_name" },
+            { label: "Username", key: "username" },
+            { label: "Phone", key: "phone" },
+            { label: "Avatar URL", key: "avatar" }
+          ].map((field) => (
+            <div key={field.key}>
+              <label className="block text-sm text-gray-400 mb-1">
+                {field.label}
+              </label>
+
+              {isEditing ? (
+                <input
+                  value={(form as any)[field.key]}
+                  onChange={(e) =>
+                    setForm({ ...form, [field.key]: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+              ) : (
+                <div className="text-white bg-gray-800 px-4 py-2 rounded-lg border border-gray-700">
+                  {(user as any)[field.key] || "-"}
+                </div>
+              )}
+            </div>
+          ))}
+
+          <div className="text-sm text-gray-400 mt-4">
+            <p><strong>User type:</strong> {user.user_type}</p>
+            <p><strong>Created:</strong> {user.created_date}</p>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-3 mt-6">
+          <button
+            onClick={() => setIsEditing(!isEditing)}
+            className="flex-1 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white"
+          >
+            {isEditing ? "Cancel" : "Edit"}
+          </button>
+
+          {isEditing && (
+            <button
+              onClick={handleSave}
+              className="flex-1 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Save
+            </button>
+          )}
+
+          <button
+            onClick={handleLogout}
+            className="flex-1 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white"
+          >
+            Logout
+          </button>
+        </div>
+
       </div>
-
-
-      <div className="flex items-center justify-center flex-col">
-        <p>
-          <strong className="text-red-500">First name:</strong>{" "}
-          {isEditing ? (
-            <input
-              value={form.first_name}
-              onChange={(e) =>
-                setForm({ ...form, first_name: e.target.value })
-              }
-            />
-          ) : (
-            user.first_name || "-"
-          )}
-        </p>
-        <p>
-          <strong>Last name:</strong>{" "}
-          {isEditing ? (
-            <input
-              value={form.last_name}
-              onChange={(e) =>
-                setForm({ ...form, last_name: e.target.value })
-              }
-            />
-          ) : (
-            user.last_name || "-"
-          )}
-        </p>
-        <p>
-          <strong>Username:</strong>{" "}
-          {isEditing ? (
-            <input
-              value={form.username}
-              onChange={(e) =>
-                setForm({ ...form, username: e.target.value })
-              }
-            />
-          ) : (
-            user.username || "-"
-          )}
-        </p>
-
-        <p>
-          <strong>Phone:</strong>{" "}
-          {isEditing ? (
-            <input
-              value={form.phone}
-              onChange={(e) =>
-                setForm({ ...form, phone: e.target.value })
-              }
-            />
-          ) : (
-            user.phone || "-"
-          )}
-        </p>
-        <p>
-          <strong>Avatar:</strong>{" "}
-          {isEditing ? (
-            <input
-              value={form.avatar}
-              onChange={(e) =>
-                setForm({ ...form, avatar: e.target.value })
-              }
-            />
-          ) : (
-            user.avatar || "-"
-          )}
-        </p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>User type:</strong> {user.user_type}</p>
-        <p><strong>Created date:</strong> {user.created_date}</p>
-      </div>
-
-
-
-      <button
-        onClick={handleLogout}
-        className="bg-black text-2xl text-white rounded-2xl p-1 flex items-center justify-center"
-      >
-        Logout
-      </button>
-      <button onClick={() => setIsEditing(!isEditing)}>
-        {isEditing ? "Cancel" : "Edit"}
-      </button>
-      {isEditing && (
-        <button onClick={handleSave}>
-          Save
-        </button>
-      )}
     </div>
   );
 }

@@ -49,46 +49,66 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "40px auto" }}>
-      <h1>Login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-950">
+      <div className="w-full max-w-md bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-800">
+        
+        <h1 className="text-3xl font-semibold text-white mb-6 text-center">
+          Login
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Enter email"
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Enter email"
+              className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Enter password"
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Enter password"
+              className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm">{error}</p>
+          )}
 
-        <button type="submit" disabled={loading} style={{ padding: "10px 16px" }}>
-          {loading ? "Loading..." : "Login"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition text-white font-medium disabled:opacity-50"
+          >
+            {loading ? "Loading..." : "Login"}
+          </button>
+        </form>
 
-      <p style={{ marginTop: "16px" }}>
-        No account? <Link to="/register">Register</Link>
-      </p>
+        <p className="text-gray-400 text-sm text-center mt-6">
+          No account?{" "}
+          <Link
+            to="/register"
+            className="text-blue-500 hover:underline"
+          >
+            Register
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

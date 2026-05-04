@@ -3,6 +3,7 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import ProtectedRoute from "../../shared/ui/ProtectedRoute";
+import Products  from "../../pages/ProductPage/ProductsPage"
 
 export default function AppRouter() {
   return (
@@ -15,6 +16,7 @@ export default function AppRouter() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/products" element={<Products />}/>
         </Route>
       </Routes>
     </BrowserRouter>

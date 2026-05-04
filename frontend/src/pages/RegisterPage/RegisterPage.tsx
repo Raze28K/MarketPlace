@@ -63,119 +63,137 @@ export default function RegisterPage() {
   };
 
   return (
-    <div style={{ maxWidth: "450px", margin: "40px auto" }}>
-      <h1>Register</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-950">
+      <div className="w-full max-w-lg bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-800">
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+        <h1 className="text-3xl font-semibold text-white mb-6 text-center">
+          Create account
+        </h1>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+          {/* Email + Password */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm text-gray-400">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            id="firstName"
-            type="text"
-            name="firstName"
-            value={form.firstName}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+            <div>
+              <label className="text-sm text-gray-400">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+          </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            id="lastName"
-            type="text"
-            name="lastName"
-            value={form.lastName}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+          {/* Username */}
+          <div>
+            <label className="text-sm text-gray-400">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="avatar">Avatar URL</label>
-          <input
-            id="avatar"
-            type="text"
-            name="avatar"
-            value={form.avatar}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+          {/* First + Last Name */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm text-gray-400">First name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={form.firstName}
+                onChange={handleChange}
+                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700"
+              />
+            </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="phone">Phone</label>
-          <input
-            id="phone"
-            type="text"
-            name="phone"
-            value={form.phone}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
-          />
-        </div>
+            <div>
+              <label className="text-sm text-gray-400">Last name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={form.lastName}
+                onChange={handleChange}
+                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700"
+              />
+            </div>
+          </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label htmlFor="userType">User Type</label>
-          <select
-            id="userType"
-            name="userType"
-            value={form.userType}
-            onChange={handleChange}
-            style={{ display: "block", width: "100%", padding: "8px" }}
+          {/* Avatar */}
+          <div>
+            <label className="text-sm text-gray-400">Avatar URL</label>
+            <input
+              type="text"
+              name="avatar"
+              value={form.avatar}
+              onChange={handleChange}
+              className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700"
+            />
+          </div>
+
+          {/* Phone + Role */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm text-gray-400">Phone</label>
+              <input
+                type="text"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm text-gray-400">User type</label>
+              <select
+                name="userType"
+                value={form.userType}
+                onChange={handleChange}
+                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700"
+              >
+                <option value="buyer">buyer</option>
+                <option value="seller">seller</option>
+                <option value="admin">admin</option>
+              </select>
+            </div>
+          </div>
+
+          {error && (
+            <p className="text-red-500 text-sm">{error}</p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition text-white font-medium disabled:opacity-50"
           >
-            <option value="buyer">buyer</option>
-            <option value="seller">seller</option>
-            <option value="admin">admin</option>
-          </select>
-        </div>
+            {loading ? "Loading..." : "Register"}
+          </button>
+        </form>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <button type="submit" disabled={loading} style={{ padding: "10px 16px" }}>
-          {loading ? "Loading..." : "Register"}
-        </button>
-      </form>
-
-      <p style={{ marginTop: "16px" }}>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+        <p className="text-gray-400 text-sm text-center mt-6">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
