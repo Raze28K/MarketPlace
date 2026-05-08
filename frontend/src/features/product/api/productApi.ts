@@ -21,3 +21,8 @@ export const updateProduct = async (id: number, data: CreateProductDto) => {
   const response = await baseApi.put(`/products/${id}`, data);
   return response.data;
 };
+
+export const postProduct = async (data: CreateProductDto) => {
+  const response = await baseApi.post("/items", data);
+  return response.data;
+};

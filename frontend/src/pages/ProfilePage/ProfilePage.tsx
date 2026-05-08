@@ -75,6 +75,16 @@ export default function ProfilePage() {
     tokenStorage.remove();
     navigate("/login");
   };
+  const handleCatalog = () => {
+    if(user.user_type == "buyer"){
+      navigate("/products");
+    }
+    else{
+      navigate("/products_seller")
+    }
+    
+    
+  };
 
   if (loading) {
     return <p className="text-center mt-10 text-gray-400">Loading...</p>;
@@ -165,6 +175,12 @@ export default function ProfilePage() {
             className="flex-1 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white"
           >
             Logout
+          </button>
+          <button
+            onClick={handleCatalog}
+            className="flex-1 py-2 rounded-lg bg-blue-500 hover:bg-blue-700 text-white"
+          >
+            Catalog
           </button>
         </div>
 

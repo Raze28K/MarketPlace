@@ -36,7 +36,7 @@ export default function LoginPage() {
       });
 
       tokenStorage.set(data.token);
-      navigate("/profile");
+      navigate("/products");
     } catch (err: any) {
       setError(
         err?.response?.data?.message ||
