@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Item } from "../../entities/product/model/types";
 import Card from "../../widgets/ProductCard/ProductCard";
 import { getProducts } from "../../features/product/api/productApi";
+import { meRequest } from "../../features/auth/api/authApi";
 import { Link } from "react-router-dom";
 
 export default function Products() {
@@ -11,7 +12,8 @@ export default function Products() {
   useEffect(() => {
     async function loadProducts() {
       try {
-        const data = await getProducts();
+        const { user } = await meRequest();
+        const data = await getProducts(user.id);
 
         setProducts(data.items);
       } catch (error) {
@@ -28,11 +30,11 @@ export default function Products() {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-6 py-5">
           <h1 className="text-3xl font-bold text-gray-800">
-            Каталог товаров
+            Мои товары
           </h1>
 
           <p className="text-gray-500 mt-1">
-            Найдите нужный товар
+            Карточки, созданные вами
           </p>
         </div>
       </div>
@@ -110,32 +112,18 @@ export default function Products() {
           >
             Найти
           </button>
-          <button
-            className="
-              bg-blue-600
+          <Link
+            to="/product_create"
+            className="bg-blue-600
               hover:bg-blue-700
               text-white
               px-6
               py-3
               rounded-xl
-              transition
-            "
+              transition"
           >
             Создать карту товара
-          </button>
-          <button
-            className="
-              bg-blue-600
-              hover:bg-blue-700
-              text-white
-              px-6
-              py-3
-              rounded-xl
-              transition
-            "
-          >
-            Мои товары
-          </button>
+          </Link>
           <Link
             to="/profile"
             className="bg-blue-600
@@ -167,7 +155,7 @@ export default function Products() {
       <div className="max-w-7xl mx-auto px-6 py-10">
         {products.length === 0 ? (
           <div className="text-center text-gray-500 text-lg">
-            Товары не найдены
+            У вас пока нет товаров
           </div>
         ) : (
           <div

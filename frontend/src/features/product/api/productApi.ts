@@ -7,8 +7,10 @@ export interface CreateProductDto {
   image: string;
 }
 
-export const getProducts = async () => {
-  const response = await baseApi.get("/items");
+export const getProducts = async (sellerId?: number) => {
+  const response = await baseApi.get("/items", {
+    params: sellerId != null ? { sellerId } : undefined,
+  });
   return response.data;
 };
 

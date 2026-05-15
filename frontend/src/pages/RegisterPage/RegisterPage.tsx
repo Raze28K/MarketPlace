@@ -50,7 +50,7 @@ export default function RegisterPage() {
       });
 
       tokenStorage.set(data.token);
-      navigate("/profile");
+      navigate("/products");
     } catch (err: any) {
       setError(
         err?.response?.data?.message ||

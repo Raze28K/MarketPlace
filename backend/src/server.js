@@ -1,7 +1,8 @@
 import { app } from './app.js';
 import { env } from './config/env.js';
 import { pool } from './db/pool.js';
-
+import { mongoose } from './db/mongo.js'
+     
 const start = async () => {
   try {
     await pool.query('SELECT 1');
